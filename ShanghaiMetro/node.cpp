@@ -6,6 +6,12 @@ Node::Node() {
 	posy = 0;
 }
 
+Node::Node(const Node &n) {
+	name = n.name;
+	posx = n.posx;
+	posy = n.posy;
+}
+
 Node::Node(QStringList strList) {
 	name = strList[0];
 	posx = strList[1].toInt();

@@ -29,36 +29,57 @@ class Ui_ShanghaiMetroClass
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout_3;
+    QLabel *dest;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *verticalSpacer_4;
+    QLabel *start;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *pushButton_5;
+    QPushButton *search;
     QSpacerItem *horizontalSpacer;
     QPushButton *clear;
     QSpacerItem *horizontalSpacer_3;
-    QGraphicsView *map;
-    QLabel *dest;
-    QSpacerItem *verticalSpacer_3;
-    QSpacerItem *verticalSpacer_4;
-    QSpacerItem *verticalSpacer_2;
-    QSpacerItem *verticalSpacer;
-    QLabel *start;
-    QPushButton *addStation;
     QSpacerItem *verticalSpacer_5;
     QLineEdit *startInput;
+    QGraphicsView *map;
     QLineEdit *destInput;
+    QSpacerItem *verticalSpacer_3;
+    QSpacerItem *verticalSpacer_2;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *addStation;
+    QSpacerItem *horizontalSpacer_5;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *ShanghaiMetroClass)
     {
         if (ShanghaiMetroClass->objectName().isEmpty())
             ShanghaiMetroClass->setObjectName(QStringLiteral("ShanghaiMetroClass"));
-        ShanghaiMetroClass->resize(1105, 847);
+        ShanghaiMetroClass->resize(1249, 947);
         centralWidget = new QWidget(ShanghaiMetroClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_3 = new QGridLayout(centralWidget);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        dest = new QLabel(centralWidget);
+        dest->setObjectName(QStringLiteral("dest"));
+
+        gridLayout_3->addWidget(dest, 3, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_3->addItem(verticalSpacer, 0, 2, 1, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_3->addItem(verticalSpacer_4, 4, 2, 1, 1);
+
+        start = new QLabel(centralWidget);
+        start->setObjectName(QStringLiteral("start"));
+
+        gridLayout_3->addWidget(start, 1, 0, 1, 1);
+
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -67,10 +88,10 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        pushButton_5 = new QPushButton(centralWidget);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        search = new QPushButton(centralWidget);
+        search->setObjectName(QStringLiteral("search"));
 
-        horizontalLayout_2->addWidget(pushButton_5);
+        horizontalLayout_2->addWidget(search);
 
         horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
@@ -88,48 +109,6 @@ public:
 
         gridLayout_3->addLayout(horizontalLayout_2, 5, 0, 1, 4);
 
-        map = new QGraphicsView(centralWidget);
-        map->setObjectName(QStringLiteral("map"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(map->sizePolicy().hasHeightForWidth());
-        map->setSizePolicy(sizePolicy);
-        map->setMinimumSize(QSize(800, 800));
-
-        gridLayout_3->addWidget(map, 0, 4, 9, 1);
-
-        dest = new QLabel(centralWidget);
-        dest->setObjectName(QStringLiteral("dest"));
-
-        gridLayout_3->addWidget(dest, 3, 0, 1, 1);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_3->addItem(verticalSpacer_3, 8, 2, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        gridLayout_3->addItem(verticalSpacer_4, 4, 2, 1, 1);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        gridLayout_3->addItem(verticalSpacer_2, 2, 2, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        gridLayout_3->addItem(verticalSpacer, 0, 2, 1, 1);
-
-        start = new QLabel(centralWidget);
-        start->setObjectName(QStringLiteral("start"));
-
-        gridLayout_3->addWidget(start, 1, 0, 1, 1);
-
-        addStation = new QPushButton(centralWidget);
-        addStation->setObjectName(QStringLiteral("addStation"));
-
-        gridLayout_3->addWidget(addStation, 7, 0, 1, 4);
-
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
         gridLayout_3->addItem(verticalSpacer_5, 6, 2, 1, 1);
@@ -139,10 +118,48 @@ public:
 
         gridLayout_3->addWidget(startInput, 1, 1, 1, 3);
 
+        map = new QGraphicsView(centralWidget);
+        map->setObjectName(QStringLiteral("map"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(map->sizePolicy().hasHeightForWidth());
+        map->setSizePolicy(sizePolicy);
+        map->setMinimumSize(QSize(900, 900));
+
+        gridLayout_3->addWidget(map, 0, 4, 12, 1);
+
         destInput = new QLineEdit(centralWidget);
         destInput->setObjectName(QStringLiteral("destInput"));
 
         gridLayout_3->addWidget(destInput, 3, 1, 1, 3);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_3->addItem(verticalSpacer_3, 11, 2, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_3->addItem(verticalSpacer_2, 2, 2, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer_4 = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_4);
+
+        addStation = new QPushButton(centralWidget);
+        addStation->setObjectName(QStringLiteral("addStation"));
+
+        horizontalLayout->addWidget(addStation);
+
+        horizontalSpacer_5 = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_5);
+
+
+        gridLayout_3->addLayout(horizontalLayout, 8, 0, 1, 4);
 
         ShanghaiMetroClass->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(ShanghaiMetroClass);
@@ -157,10 +174,10 @@ public:
     void retranslateUi(QMainWindow *ShanghaiMetroClass)
     {
         ShanghaiMetroClass->setWindowTitle(QApplication::translate("ShanghaiMetroClass", "ShanghaiMetro", nullptr));
-        pushButton_5->setText(QApplication::translate("ShanghaiMetroClass", "\346\237\245\350\257\242", nullptr));
-        clear->setText(QApplication::translate("ShanghaiMetroClass", "\346\270\205\351\231\244", nullptr));
         dest->setText(QApplication::translate("ShanghaiMetroClass", "\347\233\256\347\232\204\345\234\260\357\274\232", nullptr));
         start->setText(QApplication::translate("ShanghaiMetroClass", "\345\207\272\345\217\221\345\234\260\357\274\232", nullptr));
+        search->setText(QApplication::translate("ShanghaiMetroClass", "\346\237\245\350\257\242", nullptr));
+        clear->setText(QApplication::translate("ShanghaiMetroClass", "\346\270\205\351\231\244", nullptr));
         addStation->setText(QApplication::translate("ShanghaiMetroClass", "\346\267\273\345\212\240\347\253\231\347\202\271", nullptr));
     } // retranslateUi
 

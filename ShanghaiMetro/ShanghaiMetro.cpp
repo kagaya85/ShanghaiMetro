@@ -1,23 +1,25 @@
-#include "ShanghaiMetro.h"
 #include <qfile.h>
 #include <qdebug.h>
+#include "ShanghaiMetro.h"
+#include "mapScene.h"
 
 ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 	: QMainWindow(parent) 
 {	
 	ui.setupUi(this);
 	ShanghaiMetro::setWindowTitle("ShanghaiMetro ver:1.0.0");
-
+	
 	QFile fp("info.txt");
+
 	if (!fp.open(QIODevice::ReadOnly | QIODevice::Text))
 		qDebug() << "open file error" << endl;
 
 	QString str;
 	QStringList strList;
+	Node tempNode;
+	Link tempLink;
 
 	while (!fp.atEnd()) {
-		Node tempNode;
-		Link tempLink;
 
 		str = fp.readLine();
 		strList = str.split(' ');
@@ -35,6 +37,10 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 
 	}
 
+	testShow();
+
+	MapScene *mapScene = new MapScene(Nodes);
+	ui.map->setScene(mapScene);
 }
 
 Node ShanghaiMetro::findNode(QString name) {
@@ -46,7 +52,21 @@ Node ShanghaiMetro::findNode(QString name) {
 	return Node(); // null
 }
 
-void ShanghaiMetro::paintEvent(QPaintEvent *) {
-	QPainter painter(this);
-	QPen pen;
+void ShanghaiMetro::testShow()
+{
+	qDebug() << Nodes.size();
+
+	for (int i = 0; i<Nodes.size(); i++)
+	{
+		qDebug() << Nodes[i].name << "  " << Nodes[i].posx << "  " << Nodes[i].posy;
+		for (int j = 0; j<Nodes[i].links.size(); j++)
+		{
+			qDebug() << Nodes[i].links.size();
+			qDebug() << Nodes[i].links[j].to << "  " <<
+				Nodes[i].links[j].line.get_num() << "  " <<
+				Nodes[i].links[j].flag;
+		}
+
+	}
 }
+

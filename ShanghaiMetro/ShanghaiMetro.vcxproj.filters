@@ -48,9 +48,21 @@
     <ClCompile Include="link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mapScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="item.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ShanghaiMetro.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mapScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

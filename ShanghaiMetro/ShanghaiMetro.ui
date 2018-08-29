@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1105</width>
-    <height>847</height>
+    <width>1249</width>
+    <height>947</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,7 +83,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="search">
         <property name="text">
          <string>查询</string>
         </property>
@@ -159,8 +159,8 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>800</width>
-        <height>800</height>
+        <width>900</width>
+        <height>900</height>
        </size>
       </property>
      </widget>
