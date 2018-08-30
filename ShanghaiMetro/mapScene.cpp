@@ -1,16 +1,25 @@
 #include "mapScene.h"
+#include <qvector.h>
+#include <qalgorithms.h>
 
 MapScene::MapScene(const QVector<Node> &Nodes, QWidget *parent)
 	: QGraphicsScene(parent)
 {
-	// 站点
 	for (int i = 0; i < Nodes.size(); i++) {
-		Station *sta = new Station(Nodes[i]);
-		addItem(sta);
+		// 路线
+		for (int j = 0; j < Nodes[i].links.size(); j++) {
+			if (Nodes[i].links[j].flag != 0) {
+				Route *route = new Route(Nodes[i].links[j], Nodes[i].links[j].line.color);
+				addItem(route);
+			}
+		}
+		// 站点
+		Station *station = new Station(Nodes[i]);
+		addItem(station);
+		// 站名
+		Lable *lable = new Lable(Nodes[i]);
+		addItem(lable);
 	}
-	// 路线
-
-
 }
 
 

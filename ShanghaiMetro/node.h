@@ -10,7 +10,7 @@ public:
 	int posy;
 	QList<Link> links;
 
-	Node();
+	Node(QString n = QString::null);
 	Node(const Node &n);
 	Node(QStringList strList);
 	void set_node(QStringList strList);

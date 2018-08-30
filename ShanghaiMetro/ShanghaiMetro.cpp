@@ -37,19 +37,28 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 
 	}
 
-	testShow();
+	//testShow();
+
+	// ÃÌº”¡¥Ω”
+	for (int i = 0; i < Nodes.size(); i++) {
+		for (int j = 0; j < Nodes[i].links.size(); j++) {
+			Nodes[i].links[j].from = &Nodes[i];
+			Nodes[i].links[j].to = findNode(Nodes[i].links[j].toName);
+		}
+	}
+
 
 	MapScene *mapScene = new MapScene(Nodes);
 	ui.map->setScene(mapScene);
 }
 
-Node ShanghaiMetro::findNode(QString name) {
+Node* ShanghaiMetro::findNode(QString name) {
 	for (int i = 0; i < Nodes.size(); i++) {
 		if (Nodes[i].name == name)
-			return Nodes[i];
+			return &Nodes[i];
 	}
 
-	return Node(); // null
+ 	return NULL; // null
 }
 
 void ShanghaiMetro::testShow()

@@ -8,7 +8,7 @@ class ShanghaiMetro : public QMainWindow {
 
 public:
 	ShanghaiMetro(QWidget *parent = Q_NULLPTR);
-	Node findNode(QString name);
+	Node* findNode(QString name);
 	void testShow();
 private:
 	Ui::ShanghaiMetroClass ui;

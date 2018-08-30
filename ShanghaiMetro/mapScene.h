@@ -13,5 +13,5 @@ public:
 	MapScene(const QVector<Node> &, QWidget *parent = Q_NULLPTR);
 
 private:
-	QVector<Station> stations;
+	//QVector<Item> stations;
 };

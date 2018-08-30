@@ -55,7 +55,7 @@ public:
     {
         if (ShanghaiMetroClass->objectName().isEmpty())
             ShanghaiMetroClass->setObjectName(QStringLiteral("ShanghaiMetroClass"));
-        ShanghaiMetroClass->resize(1249, 947);
+        ShanghaiMetroClass->resize(1605, 947);
         centralWidget = new QWidget(ShanghaiMetroClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_3 = new QGridLayout(centralWidget);
@@ -125,7 +125,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(map->sizePolicy().hasHeightForWidth());
         map->setSizePolicy(sizePolicy);
-        map->setMinimumSize(QSize(900, 900));
+        map->setMinimumSize(QSize(1200, 900));
 
         gridLayout_3->addWidget(map, 0, 4, 12, 1);
 
