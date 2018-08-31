@@ -31,6 +31,12 @@
     <Filter Include="img">
       <UniqueIdentifier>{1c48d658-e423-4049-89dd-37152d33f051}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{5d829de1-9e12-4311-90aa-2c31e32b7ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{845f4113-2abf-402c-a26e-78cf73377143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,22 +45,28 @@
     <ClCompile Include="ShanghaiMetro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="line.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="link.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mapScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="item.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="mapView.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="item.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="line.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="link.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="node.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="item.h">
+      <Filter>Header Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="NewStation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,9 +77,18 @@
     <QtMoc Include="mapScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="mapView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="NewStation.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ShanghaiMetro.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="NewStation.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -77,14 +98,20 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="line.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GeneratedFiles\ui_ShanghaiMetro.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="line.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="link.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="node.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_NewStation.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

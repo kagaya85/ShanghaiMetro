@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -21,6 +20,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include "mapView.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -41,7 +41,6 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QSpacerItem *verticalSpacer_5;
     QLineEdit *startInput;
-    QGraphicsView *map;
     QLineEdit *destInput;
     QSpacerItem *verticalSpacer_3;
     QSpacerItem *verticalSpacer_2;
@@ -49,6 +48,7 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QPushButton *addStation;
     QSpacerItem *horizontalSpacer_5;
+    MapView *map;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *ShanghaiMetroClass)
@@ -118,17 +118,6 @@ public:
 
         gridLayout_3->addWidget(startInput, 1, 1, 1, 3);
 
-        map = new QGraphicsView(centralWidget);
-        map->setObjectName(QStringLiteral("map"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(map->sizePolicy().hasHeightForWidth());
-        map->setSizePolicy(sizePolicy);
-        map->setMinimumSize(QSize(1200, 900));
-
-        gridLayout_3->addWidget(map, 0, 4, 12, 1);
-
         destInput = new QLineEdit(centralWidget);
         destInput->setObjectName(QStringLiteral("destInput"));
 
@@ -161,6 +150,17 @@ public:
 
         gridLayout_3->addLayout(horizontalLayout, 8, 0, 1, 4);
 
+        map = new MapView(centralWidget);
+        map->setObjectName(QStringLiteral("map"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(map->sizePolicy().hasHeightForWidth());
+        map->setSizePolicy(sizePolicy);
+        map->setMinimumSize(QSize(1200, 900));
+
+        gridLayout_3->addWidget(map, 0, 4, 12, 1);
+
         ShanghaiMetroClass->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(ShanghaiMetroClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -178,7 +178,7 @@ public:
         start->setText(QApplication::translate("ShanghaiMetroClass", "\345\207\272\345\217\221\345\234\260\357\274\232", nullptr));
         search->setText(QApplication::translate("ShanghaiMetroClass", "\346\237\245\350\257\242", nullptr));
         clear->setText(QApplication::translate("ShanghaiMetroClass", "\346\270\205\351\231\244", nullptr));
-        addStation->setText(QApplication::translate("ShanghaiMetroClass", "\346\267\273\345\212\240\347\253\231\347\202\271", nullptr));
+        addStation->setText(QApplication::translate("ShanghaiMetroClass", "\346\267\273\345\212\240\350\267\257\347\272\277", nullptr));
     } // retranslateUi
 
 };

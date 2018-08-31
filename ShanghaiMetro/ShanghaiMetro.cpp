@@ -7,7 +7,7 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 	: QMainWindow(parent) 
 {	
 	ui.setupUi(this);
-	ShanghaiMetro::setWindowTitle("ShanghaiMetro ver:1.0.0");
+	setWindowTitle("ShanghaiMetro ver:1.0.0");
 	
 	QFile fp("info.txt");
 
@@ -61,6 +61,25 @@ Node* ShanghaiMetro::findNode(QString name) {
  	return NULL; // null
 }
 
+QStack<Node> ShanghaiMetro::findShortestPath(Node start, Node end)
+{
+	return QStack<Node>();
+}
+
+QStack<Node> ShanghaiMetro::findDirectPath(Node start, Node end)
+{
+	return QStack<Node>();
+}
+
+QStack<Node> ShanghaiMetro::findOneTransferPath(Node start, Node end)
+{
+	return QStack<Node>();
+}
+
+void ShanghaiMetro::addNode(QString n, int x, int y)
+{
+}
+
 void ShanghaiMetro::testShow()
 {
 	qDebug() << Nodes.size();
@@ -78,4 +97,3 @@ void ShanghaiMetro::testShow()
 
 	}
 }
-
