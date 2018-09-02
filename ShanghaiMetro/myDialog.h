@@ -24,10 +24,10 @@ public:
 	QString returnStaFrom();
 	QString returnStaTo();
 	int returnLineNum();
-
 private:
 	Ui::Dialog ui;
 signals:
 	void addNewLink(QString StaFrom, QString StaTo, int lineNum);
 public slots:
+	void sendSignal(bool checked);
 };

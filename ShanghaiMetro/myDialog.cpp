@@ -4,7 +4,7 @@ NewStation::NewStation(QWidget *parent) :QDialog(parent)
 {
 	ui.setupUi(this);
 	setWindowTitle("Add New Station");
-	setAttribute(Qt::WA_DeleteOnClose);
+	//setAttribute(Qt::WA_DeleteOnClose);
 }
 
 QString NewStation::returnText()
@@ -20,7 +20,8 @@ AddLink::AddLink(QWidget *parent) :QDialog(parent)
 	ui.lineNum->setMaximum(20);
 	ui.lineNum->setMinimum(1);
 	ui.lineNum->setValue(1);
-	//ui.lineNum->setSuffix("ºÅÏß");
+	//ui.lineNum->setSuffix("ºÅÏß");  
+	connect(ui.okButton, &QPushButton::clicked, this, &AddLink::sendSignal);
 }
 
 QString AddLink::returnStaFrom()
@@ -36,4 +37,9 @@ QString AddLink::returnStaTo()
 int AddLink::returnLineNum()
 {
 	return ui.lineNum->value();
+}
+
+void AddLink::sendSignal(bool checked)
+{
+	emit addNewLink(ui.fromSta->text(), ui.toSta->text(), ui.lineNum->value());
 }

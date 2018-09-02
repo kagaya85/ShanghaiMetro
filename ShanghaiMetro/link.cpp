@@ -1,4 +1,5 @@
 #include "link.h"
+#include "node.h"
 
 Link::Link(const Link &l) {
 	toName = l.toName;
@@ -23,5 +24,16 @@ void Link::set_link(QStringList strList) {
 	line = Line(strList[1].toInt());
 	flag = strList[2].toInt();
 	weight = 1;
+	to = NULL;
 	from = NULL;
+}
+
+void Link::set_link(Node* staTo, Node* staFrom, int lineNum, int lineFlag)
+{
+	to = staTo;
+	from = staFrom;
+	toName = staTo->name;
+	line = Line(lineNum);
+	flag = lineFlag;
+	weight = 1;
 }

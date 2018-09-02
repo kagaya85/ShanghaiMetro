@@ -50,6 +50,18 @@ Line::Line(int n) {
 	case 16:
 		color = QColor(100, 0, 200);
 		break;
+	case 17:
+		color = QColor(152, 245, 255);
+		break;
+	case 18:
+		color = QColor(84, 255, 159);
+		break;
+	case 19:
+		color = QColor(255, 236, 139);
+		break;
+	case 20:
+		color = QColor(255, 165, 79);
+		break;
 	default:
 		color = QColor(0, 0, 0);
 		break;

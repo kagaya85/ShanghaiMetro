@@ -49,6 +49,8 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 
 	connect(ui.map, &MapView::addNewStation, this, &ShanghaiMetro::addNode);
 	connect(ui.addLink, &QPushButton::clicked, this, &ShanghaiMetro::addLinkDialog);
+	connect(ui.search, &QPushButton::clicked, this, &ShanghaiMetro::searchPath);
+	connect(ui.clear, &QPushButton::clicked, this, &ShanghaiMetro::clearPath);
 
 	mapScene = new MapScene(Nodes);
 	ui.map->setScene(mapScene);
@@ -61,21 +63,6 @@ Node* ShanghaiMetro::findNode(QString name) {
 	}
 
  	return NULL; // null
-}
-
-QStack<Node> ShanghaiMetro::findShortestPath(Node start, Node end)
-{
-	return QStack<Node>();
-}
-
-QStack<Node> ShanghaiMetro::findDirectPath(Node start, Node end)
-{
-	return QStack<Node>();
-}
-
-QStack<Node> ShanghaiMetro::findOneTransferPath(Node start, Node end)
-{
-	return QStack<Node>();
 }
 
 void ShanghaiMetro::addNode(QString n, QPoint pos)
@@ -100,14 +87,131 @@ void ShanghaiMetro::addLinkDialog()
 	AddLink* addLink = new AddLink();
 	connect(addLink, &AddLink::addNewLink, this, &ShanghaiMetro::addLink);
 	if (addLink->exec() == QDialog::Accepted) {
-		emit addLink->addNewLink(addLink->returnStaFrom(), addLink->returnStaTo(), addLink->returnLineNum());
+		//emit addLink->addNewLink(addLink->returnStaFrom(), addLink->returnStaTo(), addLink->returnLineNum());
 	}
-	disconnect(addLink, &AddLink::addNewLink, this, &ShanghaiMetro::addLink);
+	//disconnect(addLink, &AddLink::addNewLink, this, &ShanghaiMetro::addLink);
 }
 
-void ShanghaiMetro::addLink(QString StaFrom, QString StaTo, int lineNum)
+/*将找到的路径存入Path中, 并显示在scene中*/
+void ShanghaiMetro::searchPath(QString staFrom, QString staTo)
 {
+	Node* from = findNode(staFrom);
+	Node* to = findNode(staTo);
 
+	if (from == NULL | to == NULL)
+		return;
+
+	if (from->name == to->name) {
+		Station *station = new Station(*from);
+		delete mapScene;
+		mapScene->addItem(station);
+		ui.map->setScene(mapScene);
+		return;
+	}
+
+	Path = findShortestPath(from, to);
+
+	if (Path.isEmpty() == false) {
+		Link tempLink;
+		delete mapScene;
+		while (Path.isEmpty() == false) {
+			tempLink = Path.pop();
+			Route *route = new Route(tempLink, tempLink.line.color);
+			mapScene->addItem(route);
+			Station *station = new Station(*tempLink.from);
+			mapScene->addItem(station);
+		}
+		Station *station = new Station(*tempLink.to);
+		mapScene->addItem(station);
+		ui.map->setScene(mapScene);
+	}
+
+	return;
+}
+
+void ShanghaiMetro::initCost(Node* dest)
+{
+	QQueue<Node> qin;	// 待扩展的队列
+	QQueue<Node> qout;  // 已扩展的队列
+
+	// 设置初始花费为一个大数
+	for (int i = 0; i < Nodes.size(); i++)
+		Nodes[i].cost = 9999;
+	
+	dest->cost = 0;
+
+	qin.enqueue(*dest);
+	while (qin.isEmpty() == false) {
+		Node x = qin.dequeue();
+		qout.enqueue(x);
+		for (int i = 0; i < x.links.size(); i++) {
+			int newCost = x.cost + x.links[i].weight;
+			if (newCost < x.links[i].to->cost)
+				x.links[i].to->cost = newCost;	// 更新花费
+			// 判断是否加入扩展队列
+			if (!isInQueue(qout, *x.links[i].to)) {
+				qin.enqueue(*x.links[i].to);
+			}
+		}
+	}
+}
+
+QStack<Link> ShanghaiMetro::findShortestPath(Node* start, Node* end)
+{
+	QQueue<Node> q;
+
+
+	return QStack<Link>();
+}
+//
+//QStack<Node> ShanghaiMetro::findDirectPath(Node start, Node end)
+//{
+//	return QStack<Node>();
+//}
+//
+//QStack<Node> ShanghaiMetro::findOneTransferPath(Node start, Node end)
+//{
+//	return QStack<Node>();
+//}
+
+bool ShanghaiMetro::isInQueue(const QQueue<Node> &q, const Node &x)
+{
+	for (int i = 0; i < q.size(); i++)
+		if (x == q[i])
+			return true;
+
+	return false;
+}
+
+void ShanghaiMetro::clearPath()
+{
+	ui.startInput->clear();
+	ui.destInput->clear();
+
+	delete mapScene;
+	mapScene = new MapScene(Nodes);
+	ui.map->setScene(mapScene);
+}
+
+void ShanghaiMetro::addLink(QString staFrom, QString staTo, int lineNum)
+{
+	Node* nodeFrom = findNode(staFrom);
+	Node* nodeTo = findNode(staTo);
+	Link newLink;
+
+	if (nodeFrom && nodeTo) {
+
+		newLink.set_link(nodeTo, nodeFrom, lineNum, -1);
+		nodeFrom->links.append(newLink);
+
+		newLink.set_link(nodeFrom, nodeTo, lineNum, 0);
+		nodeTo->links.append(newLink);
+
+		// update scene
+		delete mapScene;
+		mapScene = new MapScene(Nodes);
+		ui.map->setScene(mapScene);
+	}
 }
 
 void ShanghaiMetro::testShow()

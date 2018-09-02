@@ -2,7 +2,11 @@
 
 MapView::MapView(QWidget *parent) : QGraphicsView(parent)
 {
-	setAttribute(Qt::WA_DeleteOnClose); // 设置窗口关闭后自动释放内存
+	// 设置不显示滚动条
+	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	// 设置窗口关闭后自动释放内存
+	setAttribute(Qt::WA_DeleteOnClose); 
 }
 
 void MapView::mousePressEvent(QMouseEvent * event)
@@ -13,6 +17,7 @@ void MapView::mousePressEvent(QMouseEvent * event)
 			/*pos已转换为scene坐标*/
 			emit addNewStation(newSta->returnText(), mapToScene(event->pos()).toPoint());
 		}
+		delete newSta;
 	}
 	else {
 		QGraphicsView::mousePressEvent(event);
