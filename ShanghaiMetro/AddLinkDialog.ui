@@ -125,7 +125,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="3">
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLineEdit" name="fromSta"/>
     </item>
     <item row="1" column="1">
      <widget class="QLabel" name="label_2">
@@ -135,7 +135,7 @@
      </widget>
     </item>
     <item row="1" column="3">
-     <widget class="QLineEdit" name="lineEdit_2"/>
+     <widget class="QLineEdit" name="toSta"/>
     </item>
     <item row="0" column="1">
      <widget class="QLabel" name="label">
@@ -184,7 +184,7 @@
      </spacer>
     </item>
     <item row="2" column="3">
-     <widget class="QSpinBox" name="spinBox"/>
+     <widget class="QSpinBox" name="lineNum"/>
     </item>
     <item row="1" column="0">
      <spacer name="horizontalSpacer_5">
@@ -214,8 +214,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>278</x>
-     <y>253</y>
+     <x>165</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -230,8 +230,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>253</y>
+     <x>317</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>

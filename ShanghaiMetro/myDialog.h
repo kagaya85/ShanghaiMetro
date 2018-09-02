@@ -17,9 +17,17 @@ private:
 };
 
 class AddLink : public QDialog {
+	Q_OBJECT
+
 public:
 	AddLink(QWidget *parent = Q_NULLPTR);
+	QString returnStaFrom();
+	QString returnStaTo();
+	int returnLineNum();
 
 private:
 	Ui::Dialog ui;
+signals:
+	void addNewLink(QString StaFrom, QString StaTo, int lineNum);
+public slots:
 };

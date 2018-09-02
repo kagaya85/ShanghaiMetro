@@ -11,6 +11,6 @@ public:
 protected:
 	void mousePressEvent(QMouseEvent *event);
 signals:
-	void newStation(QString newStaName, QPoint newPos);
+	void addNewStation(QString newStaName, QPoint newPos);
 public slots:
 };

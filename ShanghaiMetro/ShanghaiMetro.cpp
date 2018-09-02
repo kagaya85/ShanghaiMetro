@@ -47,7 +47,7 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 		}
 	}
 
-	connect(ui.map, &MapView::newStation, this, &ShanghaiMetro::addNode);
+	connect(ui.map, &MapView::addNewStation, this, &ShanghaiMetro::addNode);
 	connect(ui.addLink, &QPushButton::clicked, this, &ShanghaiMetro::addLinkDialog);
 
 	mapScene = new MapScene(Nodes);
@@ -98,7 +98,16 @@ void ShanghaiMetro::addNode(QString n, QPoint pos)
 void ShanghaiMetro::addLinkDialog()
 {
 	AddLink* addLink = new AddLink();
-	addLink->exec();
+	connect(addLink, &AddLink::addNewLink, this, &ShanghaiMetro::addLink);
+	if (addLink->exec() == QDialog::Accepted) {
+		emit addLink->addNewLink(addLink->returnStaFrom(), addLink->returnStaTo(), addLink->returnLineNum());
+	}
+	disconnect(addLink, &AddLink::addNewLink, this, &ShanghaiMetro::addLink);
+}
+
+void ShanghaiMetro::addLink(QString StaFrom, QString StaTo, int lineNum)
+{
+
 }
 
 void ShanghaiMetro::testShow()

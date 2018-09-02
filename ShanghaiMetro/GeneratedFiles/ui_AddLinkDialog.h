@@ -35,14 +35,14 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QLineEdit *lineEdit;
+    QLineEdit *fromSta;
     QLabel *label_2;
-    QLineEdit *lineEdit_2;
+    QLineEdit *toSta;
     QLabel *label;
     QSpacerItem *horizontalSpacer_3;
     QLabel *label_3;
     QSpacerItem *horizontalSpacer_4;
-    QSpinBox *spinBox;
+    QSpinBox *lineNum;
     QSpacerItem *horizontalSpacer_5;
 
     void setupUi(QDialog *Dialog)
@@ -87,20 +87,20 @@ public:
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        lineEdit = new QLineEdit(gridLayoutWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        fromSta = new QLineEdit(gridLayoutWidget);
+        fromSta->setObjectName(QStringLiteral("fromSta"));
 
-        gridLayout->addWidget(lineEdit, 0, 3, 1, 1);
+        gridLayout->addWidget(fromSta, 0, 3, 1, 1);
 
         label_2 = new QLabel(gridLayoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 1, 1, 1);
 
-        lineEdit_2 = new QLineEdit(gridLayoutWidget);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+        toSta = new QLineEdit(gridLayoutWidget);
+        toSta->setObjectName(QStringLiteral("toSta"));
 
-        gridLayout->addWidget(lineEdit_2, 1, 3, 1, 1);
+        gridLayout->addWidget(toSta, 1, 3, 1, 1);
 
         label = new QLabel(gridLayoutWidget);
         label->setObjectName(QStringLiteral("label"));
@@ -120,10 +120,10 @@ public:
 
         gridLayout->addItem(horizontalSpacer_4, 1, 4, 1, 1);
 
-        spinBox = new QSpinBox(gridLayoutWidget);
-        spinBox->setObjectName(QStringLiteral("spinBox"));
+        lineNum = new QSpinBox(gridLayoutWidget);
+        lineNum->setObjectName(QStringLiteral("lineNum"));
 
-        gridLayout->addWidget(spinBox, 2, 3, 1, 1);
+        gridLayout->addWidget(lineNum, 2, 3, 1, 1);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 

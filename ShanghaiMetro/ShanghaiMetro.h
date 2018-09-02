@@ -19,6 +19,7 @@ public:
 
 public slots:
 	void addNode(QString n, QPoint pos);
+	void addLink(QString StaFrom, QString StaTo, int lineNum);
 	void addLinkDialog();
 
 private:

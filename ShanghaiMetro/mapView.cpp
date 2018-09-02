@@ -11,7 +11,7 @@ void MapView::mousePressEvent(QMouseEvent * event)
 		NewStation *newSta = new NewStation;
 		if (newSta->exec() == QDialog::Accepted) {
 			/*pos已转换为scene坐标*/
-			emit newStation(newSta->returnText(), mapToScene(event->pos()).toPoint());
+			emit addNewStation(newSta->returnText(), mapToScene(event->pos()).toPoint());
 		}
 	}
 	else {
