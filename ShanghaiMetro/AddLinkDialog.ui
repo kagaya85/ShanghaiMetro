@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>newStation</class>
- <widget class="QDialog" name="newStation">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>208</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>391</width>
-    <height>208</height>
+    <width>400</width>
+    <height>300</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>391</width>
-    <height>208</height>
+    <width>400</width>
+    <height>300</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -28,10 +28,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>150</y>
-     <width>391</width>
-     <height>51</height>
+     <x>20</x>
+     <y>240</y>
+     <width>351</width>
+     <height>33</height>
     </rect>
    </property>
    <layout class="QHBoxLayout">
@@ -51,7 +51,7 @@
      <number>0</number>
     </property>
     <item>
-     <spacer name="horizontalSpacer">
+     <spacer>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -74,17 +74,17 @@
      </widget>
     </item>
     <item>
-     <spacer>
+     <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
+       <enum>QSizePolicy::Preferred</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>50</width>
-        <height>31</height>
+        <width>40</width>
+        <height>20</height>
        </size>
       </property>
      </spacer>
@@ -114,20 +114,43 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>40</y>
-     <width>391</width>
-     <height>80</height>
+     <x>20</x>
+     <y>50</y>
+     <width>351</width>
+     <height>141</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <spacer name="horizontalSpacer_4">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="3">
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>目标站：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLineEdit" name="lineEdit_2"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>起始站：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <spacer name="horizontalSpacer_3">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
@@ -137,20 +160,39 @@
       </property>
      </spacer>
     </item>
-    <item>
-     <widget class="QLabel" name="label">
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>添加站点名称：</string>
+       <string>Line：</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer_3">
+    <item row="1" column="4">
+     <spacer name="horizontalSpacer_4">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="3">
+     <widget class="QSpinBox" name="spinBox"/>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
@@ -168,12 +210,12 @@
   <connection>
    <sender>okButton</sender>
    <signal>clicked()</signal>
-   <receiver>newStation</receiver>
+   <receiver>Dialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>164</x>
-     <y>188</y>
+     <x>278</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -184,12 +226,12 @@
   <connection>
    <sender>cancelButton</sender>
    <signal>clicked()</signal>
-   <receiver>newStation</receiver>
+   <receiver>Dialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>319</x>
-     <y>188</y>
+     <x>369</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>

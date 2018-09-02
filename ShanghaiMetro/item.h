@@ -7,6 +7,8 @@
 #define Radio 0.6	// 站点位置缩放
 #define X0 -460		// 原点坐标
 #define Y0 -380
+//#define X0 0
+//#define Y0 0
 #define Offset 4
 
 //class Item : public QGraphicsItem, public Node {

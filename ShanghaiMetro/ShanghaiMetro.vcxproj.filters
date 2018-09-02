@@ -66,7 +66,7 @@
     <ClCompile Include="item.h">
       <Filter>Header Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="NewStation.cpp">
+    <ClCompile Include="myDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <QtMoc Include="mapView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="NewStation.h">
+    <QtMoc Include="myDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -89,6 +89,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="NewStation.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddLinkDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

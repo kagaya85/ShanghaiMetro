@@ -1,7 +1,7 @@
 #pragma once
 #include <qgraphicsview.h>
 #include <qevent.h>
-#include "NewStation.h"
+#include "myDialog.h"
 
 class MapView : public QGraphicsView {
 	Q_OBJECT
@@ -11,6 +11,6 @@ public:
 protected:
 	void mousePressEvent(QMouseEvent *event);
 signals:
-
+	void newStation(QString newStaName, QPoint newPos);
 public slots:
 };

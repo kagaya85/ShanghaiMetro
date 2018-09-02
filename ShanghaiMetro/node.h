@@ -2,6 +2,7 @@
 #include <qstring.h>
 #include <qlist.h>
 #include <link.h>
+#include <qpoint.h>
 
 class Node {
 public:
@@ -12,6 +13,7 @@ public:
 
 	Node(QString n = QString::null);
 	Node(const Node &n);
+	Node(QString n, QPoint pos);
 	Node(QStringList strList);
 	void set_node(QStringList strList);
 	bool operator==(const Node b);

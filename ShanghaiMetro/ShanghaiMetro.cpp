@@ -1,14 +1,14 @@
+#include <ShanghaiMetro.h>
 #include <qfile.h>
 #include <qdebug.h>
-#include "ShanghaiMetro.h"
-#include "mapScene.h"
+#include "myDialog.h"
 
 ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 	: QMainWindow(parent) 
 {	
 	ui.setupUi(this);
 	setWindowTitle("ShanghaiMetro ver:1.0.0");
-	
+	//setAttribute(Qt::WA_DeleteOnClose); // 设置窗口关闭后自动释放内存 会报错
 	QFile fp("info.txt");
 
 	if (!fp.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -47,8 +47,10 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 		}
 	}
 
+	connect(ui.map, &MapView::newStation, this, &ShanghaiMetro::addNode);
+	connect(ui.addLink, &QPushButton::clicked, this, &ShanghaiMetro::addLinkDialog);
 
-	MapScene *mapScene = new MapScene(Nodes);
+	mapScene = new MapScene(Nodes);
 	ui.map->setScene(mapScene);
 }
 
@@ -76,8 +78,27 @@ QStack<Node> ShanghaiMetro::findOneTransferPath(Node start, Node end)
 	return QStack<Node>();
 }
 
-void ShanghaiMetro::addNode(QString n, int x, int y)
+void ShanghaiMetro::addNode(QString n, QPoint pos)
 {
+	if (n == QString::null)
+		return;
+	/*pos为scene坐标*/
+	int realx = (pos.x() - X0) / Radio;
+	int realy = (pos.y() - X0) / Radio;
+	Node newNode(n, QPoint(realx, realy));
+	Nodes.append(newNode);
+
+	delete mapScene;
+	mapScene = new MapScene(Nodes);
+	ui.map->setScene(mapScene);
+
+	return;
+}
+
+void ShanghaiMetro::addLinkDialog()
+{
+	AddLink* addLink = new AddLink();
+	addLink->exec();
 }
 
 void ShanghaiMetro::testShow()

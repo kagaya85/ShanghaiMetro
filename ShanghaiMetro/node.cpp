@@ -13,6 +13,12 @@ Node::Node(const Node &n) {
 	links = n.links;
 }
 
+Node::Node(QString n, QPoint pos) {
+	name = n;
+	posx = pos.x();
+	posy = pos.y();
+}
+
 Node::Node(QStringList strList) {
 	name = strList[0];
 	posx = strList[1].toInt();

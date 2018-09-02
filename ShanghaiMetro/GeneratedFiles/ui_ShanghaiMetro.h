@@ -46,7 +46,7 @@ public:
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_4;
-    QPushButton *addStation;
+    QPushButton *addLink;
     QSpacerItem *horizontalSpacer_5;
     MapView *map;
     QStatusBar *statusBar;
@@ -138,10 +138,10 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_4);
 
-        addStation = new QPushButton(centralWidget);
-        addStation->setObjectName(QStringLiteral("addStation"));
+        addLink = new QPushButton(centralWidget);
+        addLink->setObjectName(QStringLiteral("addLink"));
 
-        horizontalLayout->addWidget(addStation);
+        horizontalLayout->addWidget(addLink);
 
         horizontalSpacer_5 = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
@@ -178,7 +178,7 @@ public:
         start->setText(QApplication::translate("ShanghaiMetroClass", "\345\207\272\345\217\221\345\234\260\357\274\232", nullptr));
         search->setText(QApplication::translate("ShanghaiMetroClass", "\346\237\245\350\257\242", nullptr));
         clear->setText(QApplication::translate("ShanghaiMetroClass", "\346\270\205\351\231\244", nullptr));
-        addStation->setText(QApplication::translate("ShanghaiMetroClass", "\346\267\273\345\212\240\350\267\257\347\272\277", nullptr));
+        addLink->setText(QApplication::translate("ShanghaiMetroClass", "\346\267\273\345\212\240\350\267\257\347\272\277", nullptr));
     } // retranslateUi
 
 };

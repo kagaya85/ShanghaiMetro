@@ -5,6 +5,7 @@
 MapScene::MapScene(const QVector<Node> &Nodes, QWidget *parent)
 	: QGraphicsScene(parent)
 {
+
 	for (int i = 0; i < Nodes.size(); i++) {
 		// Â·Ïß
 		for (int j = 0; j < Nodes[i].links.size(); j++) {
