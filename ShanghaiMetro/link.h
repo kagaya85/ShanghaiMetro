@@ -19,4 +19,5 @@ public:
 	Link(QStringList strList);
 	void set_link(QStringList strList);
 	void set_link(Node* staTo, Node* staFrom, int lineNum, int flag = 0);
+	bool operator==(const Link& L) const;
 };

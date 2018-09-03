@@ -1,7 +1,7 @@
 #include "item.h"
 #include <qpoint.h>
 
-Station::Station(const Node &n) : Node(n)
+Station::Station(const Node& n) : Node(n)
 {
 	// Ä¬ÈÏstation
 	color = Qt::black;

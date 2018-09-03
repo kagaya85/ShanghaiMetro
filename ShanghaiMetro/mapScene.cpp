@@ -23,4 +23,9 @@ MapScene::MapScene(const QVector<Node> &Nodes, QWidget *parent)
 	}
 }
 
-
+MapScene::MapScene(QWidget *parent)
+	: QGraphicsScene(parent)
+{
+	// 设置一个空画布
+	setSceneRect(0, 0, 1200, 898);
+}

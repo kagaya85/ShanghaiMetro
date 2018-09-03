@@ -11,7 +11,7 @@ class MapScene : public QGraphicsScene {
 
 public:
 	MapScene(const QVector<Node> &, QWidget *parent = Q_NULLPTR);
-
+	MapScene(QWidget *parent = Q_NULLPTR);
 private:
 	//QVector<Item> stations;
 };

@@ -2,6 +2,17 @@
 #include <qfile.h>
 #include <qdebug.h>
 #include "myDialog.h"
+#include <queue>
+#include <vector>
+
+struct cmp
+{
+	bool operator()(Node* a, Node* b) const
+	{
+		//因为优先出列判定为!cmp，所以反向定义实现最小值优先
+		return a->costF+a->costT > b->costF + b->costT;
+	}
+};
 
 ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 	: QMainWindow(parent) 
@@ -49,8 +60,8 @@ ShanghaiMetro::ShanghaiMetro(QWidget *parent)
 
 	connect(ui.map, &MapView::addNewStation, this, &ShanghaiMetro::addNode);
 	connect(ui.addLink, &QPushButton::clicked, this, &ShanghaiMetro::addLinkDialog);
-	connect(ui.search, &QPushButton::clicked, this, &ShanghaiMetro::searchPath);
-	connect(ui.clear, &QPushButton::clicked, this, &ShanghaiMetro::clearPath);
+	connect(ui.search, &QPushButton::clicked, this, &ShanghaiMetro::search);
+	connect(ui.clear, &QPushButton::clicked, this, &ShanghaiMetro::clear);
 
 	mapScene = new MapScene(Nodes);
 	ui.map->setScene(mapScene);
@@ -113,44 +124,58 @@ void ShanghaiMetro::searchPath(QString staFrom, QString staTo)
 
 	if (Path.isEmpty() == false) {
 		Link tempLink;
+		Route *route;
+		Station *station;
+		Lable *lable;
+
 		delete mapScene;
+		mapScene = new MapScene;
 		while (Path.isEmpty() == false) {
 			tempLink = Path.pop();
-			Route *route = new Route(tempLink, tempLink.line.color);
+			route = new Route(tempLink, tempLink.line.color);
 			mapScene->addItem(route);
-			Station *station = new Station(*tempLink.from);
+			station = new Station(*tempLink.to);
 			mapScene->addItem(station);
+			lable = new Lable(*tempLink.to);
+			mapScene->addItem(lable);
 		}
-		Station *station = new Station(*tempLink.to);
+		station = new Station(*tempLink.from);
 		mapScene->addItem(station);
+		lable = new Lable(*tempLink.from);
+		mapScene->addItem(lable);
+
 		ui.map->setScene(mapScene);
 	}
 
 	return;
 }
 
+/*初始化搜索变量*/
 void ShanghaiMetro::initCost(Node* dest)
 {
-	QQueue<Node> qin;	// 待扩展的队列
-	QQueue<Node> qout;  // 已扩展的队列
+	QQueue<Node*> qin;	// 待扩展的队列
+	QQueue<Node*> qout;  // 已扩展的队列
 
 	// 设置初始花费为一个大数
-	for (int i = 0; i < Nodes.size(); i++)
-		Nodes[i].cost = 9999;
+	for (int i = 0; i < Nodes.size(); i++) {
+		Nodes[i].costT = 9999;
+		Nodes[i].costF = 9999;
+		Nodes[i].pathFrom = NULL;
+	}
 	
-	dest->cost = 0;
+	dest->costT = 0;
 
-	qin.enqueue(*dest);
+	qin.enqueue(dest);
 	while (qin.isEmpty() == false) {
-		Node x = qin.dequeue();
+		Node* x = qin.dequeue();
 		qout.enqueue(x);
-		for (int i = 0; i < x.links.size(); i++) {
-			int newCost = x.cost + x.links[i].weight;
-			if (newCost < x.links[i].to->cost)
-				x.links[i].to->cost = newCost;	// 更新花费
-			// 判断是否加入扩展队列
-			if (!isInQueue(qout, *x.links[i].to)) {
-				qin.enqueue(*x.links[i].to);
+		for (int i = 0; i < x->links.size(); i++) {
+			int newCost = x->costT + x->links[i].weight;
+			if (newCost < x->links[i].to->costT)
+				x->links[i].to->costT = newCost;	// 更新花费
+			if (!isInQueue(qout, x->links[i].to)) {
+				// 加入扩展队列
+				qin.enqueue(x->links[i].to);
 			}
 		}
 	}
@@ -158,11 +183,72 @@ void ShanghaiMetro::initCost(Node* dest)
 
 QStack<Link> ShanghaiMetro::findShortestPath(Node* start, Node* end)
 {
-	QQueue<Node> q;
+	QStack<Link> result;
+	std::priority_queue<Node*, std::vector<Node*>, cmp> qin;
+	QQueue<Node*> qout;  // 已扩展的队列
+	int flag = 0;	// 找到终点标志
 
+	initCost(end);
+	start->costF = 0;
 
-	return QStack<Link>();
+	qin.push(start);
+	while (qin.empty() == false) {
+		Node* x = qin.top();
+		qin.pop();
+		qout.enqueue(x);
+		for (int i = 0; i < x->links.size(); i++) {
+			int newCost = x->costF + x->links[i].weight;
+			if (newCost < x->links[i].to->costF) {
+				x->links[i].to->costF = newCost;	// 更新花费
+				x->links[i].to->pathFrom = x->links[i].from;
+				if (x->links[i].to == end)
+					flag = 1;
+			}
+			if (!isInQueue(qout,x->links[i].to)) {
+				// 加入扩展队列
+				qin.push(x->links[i].to);
+			}
+		}
+		if (flag)
+			break;
+	}
+
+	/*提取路径*/
+	if (flag) {
+		Link L;
+		Node* p;
+		for (int i = 0; i < end->links.size(); i++)
+			if (end->links[i].to == end->pathFrom) {
+				L = end->links[i];
+				break;
+			}
+		result.push(L);
+		p = end->pathFrom;
+		while (p->name != start->name) {
+			// 先搜索同线路的link
+			for (int i = 0; i < p->links.size(); i++) {
+				if (p->links[i].to == p->pathFrom && p->links[i].line.num == result.top().line.num) {
+					L = p->links[i];
+					break;
+				}
+			}
+			// 判断是否找到，未找到重新搜索
+			if (L == result.top()) {
+				for (int i = 0; i < p->links.size(); i++) {
+					if (p->links[i].to == p->pathFrom) {
+						L = p->links[i];
+						break;
+					}
+				}
+			}
+			result.push(L);
+			p = p->pathFrom;
+		}
+	}
+
+	return result;
 }
+
 //
 //QStack<Node> ShanghaiMetro::findDirectPath(Node start, Node end)
 //{
@@ -174,7 +260,7 @@ QStack<Link> ShanghaiMetro::findShortestPath(Node* start, Node* end)
 //	return QStack<Node>();
 //}
 
-bool ShanghaiMetro::isInQueue(const QQueue<Node> &q, const Node &x)
+bool ShanghaiMetro::isInQueue(const QQueue<Node*> q, const Node* x)
 {
 	for (int i = 0; i < q.size(); i++)
 		if (x == q[i])
@@ -183,7 +269,7 @@ bool ShanghaiMetro::isInQueue(const QQueue<Node> &q, const Node &x)
 	return false;
 }
 
-void ShanghaiMetro::clearPath()
+void ShanghaiMetro::clear()
 {
 	ui.startInput->clear();
 	ui.destInput->clear();
@@ -191,6 +277,11 @@ void ShanghaiMetro::clearPath()
 	delete mapScene;
 	mapScene = new MapScene(Nodes);
 	ui.map->setScene(mapScene);
+}
+
+void ShanghaiMetro::search()
+{
+	searchPath(ui.startInput->text(), ui.destInput->text());
 }
 
 void ShanghaiMetro::addLink(QString staFrom, QString staTo, int lineNum)

@@ -17,14 +17,15 @@ public:
 	//QStack<Node> findDirectPath(Node start, Node end);
 	//QStack<Node> findOneTransferPath(Node start, Node end);
 	void testShow();
-	bool isInQueue(const QQueue<Node> &q, const Node &x);
+	bool isInQueue(const QQueue<Node*> q, const Node* x);
+	void searchPath(QString staFrom, QString staTo);
 
 public slots:
 	void addNode(QString n, QPoint pos);
 	void addLink(QString staFrom, QString staTo, int lineNum);
 	void addLinkDialog();
-	void searchPath(QString staFrom, QString staTo);
-	void clearPath();
+	void search();
+	void clear();
 private:
 	Ui::ShanghaiMetroClass ui;
 	QVector<Node> Nodes;

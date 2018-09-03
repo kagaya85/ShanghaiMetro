@@ -37,3 +37,10 @@ void Link::set_link(Node* staTo, Node* staFrom, int lineNum, int lineFlag)
 	flag = lineFlag;
 	weight = 1;
 }
+
+bool Link::operator==(const Link & L) const
+{
+	if (to == L.to && from == L.from && line.num == L.line.num)
+		return true;
+	return false;
+}
