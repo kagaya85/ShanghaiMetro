@@ -9,6 +9,9 @@ Shanghai metro based on Qt
 Qt 5.11.1
 Visual Studio 2017
 
+## 其他
+
+换乘寻路算法：A*
 站点数据来源：[Shanghai-Metro](https://github.com/HarlanHW/Shanghai-Metro)
 
 --------------------
